@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { StrictMode } from 'react'
+import CounterContainer from './containers/Counter'
+import { counterApp } from './reducers/index'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// Store
+const store = createStore(counterApp);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <StrictMode>
+    <Provider store={store}>
+      <CounterContainer />
+    </Provider>
+  </StrictMode>,
+  document.getElementById('root')
+)
